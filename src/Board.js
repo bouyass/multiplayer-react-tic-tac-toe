@@ -32,11 +32,9 @@ function Board(props) {
                 element.addEventListener('click',turnClick, false)
             }
             element.innerText = ""
-            board.push(elements.push(element))
+            elements.push(element)
+            board.push(i)
         }
-        setBoard(Array.from(Array(9).keys()))
-        
-        
 
         props.socket.on('play', (message) => {
             if(props.player === 'O'){
@@ -93,12 +91,18 @@ function Board(props) {
             setReplayStart(true)
             resetGame()
             disableElements()
-            console.log(props.opponent+" et "+ props.player)
         } )
 
     },[])
 
     const resetGame = () => {
+        
+        setBoard([])
+        
+        for(let i=0; i<9;i++){
+            board[i]=i
+        }
+        console.log(board)
         for(let i = 0; i<9; i++){
             const element = document.getElementById(i)
             if(replayStart){
@@ -108,11 +112,14 @@ function Board(props) {
             element.style.backgroundColor = ''
             board.push(elements.push(element))
         }
-        setBoard(Array.from(Array(9).keys()))
+        
         document.querySelector('.endGame').style.display = "none"
-        document.querySelector('.text').style.display = "none"
         document.querySelector('.text').innerText = ""
+        
     }
+
+
+
 
     const turnClick = (square) => {
         if(typeof board[square.target.id] == 'number'){
@@ -281,9 +288,6 @@ function Board(props) {
     const replayHandler = () => {
         props.socket.emit('replay', {opponent: props.opponent})
     }
-
-
-    
 
 
     return (
