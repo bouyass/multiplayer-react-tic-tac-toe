@@ -1,0 +1,59 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    gap:40px;
+}
+table{
+    border-collapse: collapse;
+}
+
+td {
+    border: 3px solid black;
+    width: 200px;
+    height: 200px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 150px;
+}
+
+table tr:first-child td {
+    border-top: none;
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+table tr td:first-child {
+    border-left: none;
+}
+
+table tr td:last-child {
+    border-right: none;
+}
+
+.endGame{
+    display: none;
+    top: 410px;
+    background-color: rgba(205, 133, 63, 0.95);
+    position: absolute;
+    margin-left: -100px;
+    left: 50%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+    width: auto;
+}
+
+.text {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.buttons{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
