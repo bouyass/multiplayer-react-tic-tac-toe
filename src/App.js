@@ -13,7 +13,7 @@ function App() {
   const[typeGame, setTypeGame] = useState('')
   const[searchingOpponent, setSearcingOpponent] = useState(false)
   const[opponent, setOpponent] = useState()
-  const[player, setPlayer] = useState()
+  const[player, setPlayer] = useState('O')
   const[start, setStart] =useState()
   const[waitingTime, setWaitingTime] = useState(30)
   const[failedFindOpponent, setFailedFindOpponent] = useState(false)

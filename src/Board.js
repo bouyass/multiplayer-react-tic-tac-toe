@@ -28,7 +28,8 @@ function Board(props) {
         setSocket(props.socket)
         for(let i = 0; i<9; i++){
             const element = document.getElementById(i)
-            if(props.start){
+            console.log(props.typeGame)
+            if(props.start || props.typeGame){
                 element.addEventListener('click',turnClick, false)
             }
             element.innerText = ""
@@ -96,25 +97,25 @@ function Board(props) {
     },[])
 
     const resetGame = () => {
-        
+
         setBoard([])
         
         for(let i=0; i<9;i++){
             board[i]=i
         }
-        console.log(board)
+
         for(let i = 0; i<9; i++){
             const element = document.getElementById(i)
-            if(replayStart){
+            if(replayStart || props.typeGame === 'machine'){
                 element.addEventListener('click',turnClick, false)
             }
             element.innerText = ""
             element.style.backgroundColor = ''
-            board.push(elements.push(element))
         }
         
         document.querySelector('.endGame').style.display = "none"
         document.querySelector('.text').innerText = ""
+        console.log(board)
         
     }
 
@@ -123,6 +124,7 @@ function Board(props) {
 
     const turnClick = (square) => {
         if(typeof board[square.target.id] == 'number'){
+            
             turn(square.target.id, props.player)
             if(props.typeGame === 'machine'){
                 if(!winning(board, humanPlyer) && !checkTie()) turn(bestSpot(board), aiPlayer)
@@ -286,7 +288,11 @@ function Board(props) {
     }
 
     const replayHandler = () => {
-        props.socket.emit('replay', {opponent: props.opponent})
+        if(props.typeGame === 'machine'){
+            resetGame()
+        }else{
+            props.socket.emit('replay', {opponent: props.opponent})   
+        }
     }
 
 
